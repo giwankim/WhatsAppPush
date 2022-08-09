@@ -14,7 +14,8 @@
     "eslint-plugin-import": "^2.26.0",
     "git-list-updated": "^1.2.1",
     "prettier": "^2.7.1",
-    "serverless": "^3.21.0"
+    "serverless": "^3.21.0",
+    "serverless-export-env": "^2.2.0"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",

@@ -27,6 +27,24 @@ provider:
             - dynamodb:DeleteItem
           Resource: !GetAtt TemplatesTable.Arn
 
+functions:
+  CreateTemplates:
+    handler: handlers/template.create
+    description: Function to handle business logic to create templates
+    events:
+      - http:
+          path: /template
+          method: POST
+          cors: true
+  UpdateTemplates:
+    handler: handlers/template.update
+    description: Function to handle business logic to update templates
+    events:
+      - http:
+          path: /template/{user_id}/{template_id}
+          method: PUT
+          cors: true
+
 resources:
   Resources:
     TemplatesTable:
