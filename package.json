@@ -4,10 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sls": "serverless"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
   "devDependencies": {
+    "@serverless/eslint-config": "^4.0.1",
+    "aws-sdk": "^2.1190.0",
+    "eslint": "^8.21.0",
+    "eslint-plugin-import": "^2.26.0",
+    "git-list-updated": "^1.2.1",
+    "prettier": "^2.7.1",
     "serverless": "^3.21.0"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "http-status": "^1.5.2",
+    "uuid": "^8.3.2"
+  },
+  "eslintConfig": {
+    "extends": "@serverless/eslint-config/node",
+    "root": true
   }
 }
