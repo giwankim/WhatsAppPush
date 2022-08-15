@@ -3,17 +3,12 @@
 const HttpStatus = require('http-status');
 
 const validateHttpRequest = (event, schema) => {
-  // TODO
   if (!event.body) {
     throw new Error('Missing parameter');
   }
-  const requestBody = JSON.parse(event.body);
-  const { error, value } = schema.validate(requestBody);
+  const { error, value } = schema.validate(event.body);
   if (error) {
-    return handleError(
-      HttpStatus.BAD_REQUEST,
-      `[Template:Create:Error]:${HttpStatus[HttpStatus.BAD_REQUEST]}: ${error}`
-    );
+    throw new Error(error);
   }
   return value;
 };

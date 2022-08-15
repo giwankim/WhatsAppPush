@@ -33,7 +33,7 @@
 - [x] Create DynamoDB table called `Templates`.
     - Partition key: `user_id` of type string
     - Sort key: `template_id` of type string
-- [ ] Define a lambda function called `CreateTemplates` associated with POST API route `/templates` that adds a new message template.
+- [x] Define a lambda function called `CreateTemplates` associated with POST API route `/templates` that adds a new message template.
     - Template message records must have assocated template name, message text, and user ID
         - Validate the POST request body before saving it to DynamoDB. In case of validation error, return an appropriate error message with HTTP status code.
         - To identify each template uniquely in the Templates table, associate a unique ID.

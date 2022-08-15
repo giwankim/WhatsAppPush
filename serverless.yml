@@ -28,7 +28,7 @@ provider:
 
 functions:
   CreateTemplates:
-    handler: handlers/template.create
+    handler: handlers/template/createTemplate.handler
     description: Function to handle business logic to create templates
     events:
       - http:
@@ -39,7 +39,6 @@ functions:
 resources:
   Resources:
     TemplatesTable: ${file(framework/resources/TemplatesTable.yml):TemplatesTable}
-
   Outputs:
     TemplatesTableName:
       Value: !Ref TemplatesTable
