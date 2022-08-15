@@ -4,6 +4,7 @@
   "description": "",
   "main": "handlers/template.js",
   "scripts": {
+    "dotEnv": "sls export-env --all",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
@@ -19,6 +20,9 @@
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "@middy/core": "^3.2.0",
+    "@middy/http-event-normalizer": "^3.2.0",
+    "@middy/http-json-body-parser": "^3.2.0",
     "http-status": "^1.5.2",
     "uuid": "^8.3.2"
   },

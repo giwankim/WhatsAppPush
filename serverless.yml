@@ -4,7 +4,11 @@ frameworkVersion: '3'
 
 custom:
   name: giwankim
-  templatesTableName: Templates
+  export-env:
+    overwrite: true
+  TemplatesTable:
+    name: !Ref TemplatesTable
+    arn: !GetAtt TemplatesTable.Arn
 
 provider:
   name: aws
@@ -12,18 +16,12 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: ap-northeast-2
   versionFunctions: false
-
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:DescribeTable
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource: !GetAtt TemplatesTable.Arn
+  environment:
+    TEMPLATES_TABLE_NAME: ${self:custom.TemplatesTable.name}
+  iam:
+    role:
+      statements:
+        - ${file(framework/iam/TemplatesTableIAM.yml):TemplatesTableIAM}
 
 functions:
   CreateTemplates:
@@ -34,29 +32,7 @@ functions:
           path: /template
           method: POST
           cors: true
-  UpdateTemplates:
-    handler: handlers/template.update
-    description: Function to handle business logic to update templates
-    events:
-      - http:
-          path: /template/{user_id}/{template_id}
-          method: PUT
-          cors: true
 
 resources:
   Resources:
-    TemplatesTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:custom.templatesTableName}
-        AttributeDefinitions:
-          - AttributeName: user_id
-            AttributeType: S
-          - AttributeName: template_id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: user_id
-            KeyType: HASH
-          - AttributeName: template_id
-            KeyType: RANGE
-        BillingMode: PAY_PER_REQUEST
+    TemplatesTable: ${file(framework/resources/TemplatesTable.yml):TemplatesTable}

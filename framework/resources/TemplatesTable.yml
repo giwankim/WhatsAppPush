@@ -1,0 +1,15 @@
+TemplatesTable:
+  Type: AWS::DynamoDB::Table
+  Properties:
+    TableName: Templates-${self:provider.stage}
+    BillingMode: PAY_PER_REQUEST
+    AttributeDefinitions:
+      - AttributeName: user_id
+        AttributeType: S
+      - AttributeName: template_id
+        AttributeType: S
+    KeySchema:
+      - AttributeName: user_id
+        KeyType: HASH
+      - AttributeName: template_id
+        KeyType: RANGE
