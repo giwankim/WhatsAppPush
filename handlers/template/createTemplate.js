@@ -9,15 +9,15 @@ const { validateHttpRequest, handleSuccess, handleError } = require('../../libs/
 
 const tableName = process.env.TEMPLATES_TABLE_NAME;
 
-const queryTemplate = (user_id, idempotent_key) => {
+const queryTemplate = (userId, idempotentKey) => {
   const params = {
     TableName: tableName,
     Limit: 1,
     KeyConditionExpression: 'user_id = :user_id',
     FilterExpression: 'idempotent_key = :idempotent_key',
     ExpressionAttributeValues: {
-      ':user_id': user_id,
-      ':idempotent_key': idempotent_key,
+      ':user_id': userId,
+      ':idempotent_key': idempotentKey,
     },
   };
   return docClient.query(params);
