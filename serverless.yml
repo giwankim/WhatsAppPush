@@ -4,9 +4,14 @@ frameworkVersion: '3'
 
 plugins:
   - serverless-export-env
+  - serverless-webpack
 
 custom:
   name: giwankim
+  webpack:
+    includeModules: false
+  package:
+    individually: true
   export-env:
     overwrite: true
   TemplatesTable:
@@ -39,6 +44,7 @@ functions:
 resources:
   Resources:
     TemplatesTable: ${file(framework/resources/TemplatesTable.yml):TemplatesTable}
+
   Outputs:
     TemplatesTableName:
       Value: !Ref TemplatesTable
