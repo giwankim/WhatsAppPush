@@ -4,20 +4,37 @@ const { DocumentClient } = require('aws-sdk/clients/dynamodb');
 
 const docClient = new DocumentClient();
 
-const get = (params) => {
+exports.get = (params) => {
   return docClient.get(params).promise();
 };
 
-const put = (params) => {
+exports.put = (params) => {
   return docClient.put(params).promise();
 };
 
-const query = (params) => {
+exports.query = (params) => {
   return docClient.query(params).promise();
 };
 
-module.exports = {
-  get,
-  put,
-  query,
+// exports.scan = async (params) => {
+//   let output;
+//   const items = [];
+//   do {
+//     output = await docClient.scan(params).promise();
+//     if (output.Items) {
+//       items.push(...output.Items);
+//     }
+//   } while ();
+//   return {
+//     lastEvaluatedKey: output.LastEvaluatedKey,
+//     items,
+//   };
+// };
+
+exports.update = async (params) => {
+  await docClient.update(params).promise();
+};
+
+exports.delete = async (params) => {
+  await docClient.delete(params).promise();
 };

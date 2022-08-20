@@ -33,15 +33,16 @@ provider:
 
 functions:
   CreateTemplates:
-    handler: handlers/template/createTemplate.handler
+    handler: handlers/template/createTemplates.handler
     description: Function to handle business logic to create templates
     events:
       - http:
           path: /templates
           method: POST
           cors: true
+  
   UpdateTemplates:
-    handler: handlers/template/update
+    handler: handlers/template/updateTemplates.handler
     description: Function to handle business logic to update templates
     events:
       - http:
@@ -49,10 +50,33 @@ functions:
           method: PUT
           cors: true
 
+  DeleteTemplates:
+    handler: handlers/template/deleteTemplates.clehandler
+    description: Function to handle business logic to delete templates
+    events:
+      - http:
+          path: /templates/{user_id}/{template_id}
+          method: DELETE
+          cors: true
+
+  DetailsTemplates:
+    handler: handlers/template/detailsTemplates.handler
+    description: Function to handle business logic to get template details
+    events:
+      - http:
+          path: /templates/{user_id}/{template_id}
+          method: GET
+          cors: true
+
+  ListTemplates:
+    handler: handlers/template/listTemplates.handler
+    description: Function to handle business logic to list templates
+    events:
+      - http:
+          path: /templates/{user_id}
+          method: GET
+          cors: true
+
 resources:
   Resources:
     TemplatesTable: ${file(framework/resources/TemplatesTable.yml):TemplatesTable}
-
-  Outputs:
-    TemplatesTableName:
-      Value: !Ref TemplatesTable

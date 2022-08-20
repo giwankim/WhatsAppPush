@@ -1,29 +1,15 @@
 'use strict';
-
 const HttpStatus = require('http-status');
 const { v4: uuid } = require('uuid');
 const docClient = require('../../libs/dynamodb-client');
 const commonMiddleware = require('../../libs/middleware/commonMiddleware');
 const createTemplatesSchema = require('../../libs/schema/create-template.schema');
 const { validateHttpRequest, handleSuccess, handleError } = require('../../libs/response-handler');
+const { queryTemplates } = require('../../libs/templates/queryTemplates');
 
-const tableName = process.env.TEMPLATES_TABLE_NAME;
+const TABLE_NAME = process.env.TEMPLATES_TABLE_NAME;
 
-const queryTemplate = (userId, idempotentKey) => {
-  const params = {
-    TableName: tableName,
-    Limit: 1,
-    KeyConditionExpression: 'user_id = :user_id',
-    FilterExpression: 'idempotent_key = :idempotent_key',
-    ExpressionAttributeValues: {
-      ':user_id': userId,
-      ':idempotent_key': idempotentKey,
-    },
-  };
-  return docClient.query(params);
-};
-
-const createTemplate = async (event, context) => {
+const create = async (event) => {
   let value;
   try {
     value = validateHttpRequest(event, createTemplatesSchema);
@@ -35,24 +21,25 @@ const createTemplate = async (event, context) => {
   }
 
   try {
-    const { template_name, template_message, user_id, idempotent_key } = value;
+    const { templateName, templateMessage, userId, idempotentKey } = value;
 
-    const queryResult = await queryTemplate(user_id, idempotent_key);
+    const queryResult = await queryTemplates(userId, idempotentKey);
     if (!!queryResult && queryResult.Count && queryResult.Items.length) {
       return handleSuccess(queryResult.Items[0]);
     }
 
     const params = {
-      TableName: tableName,
+      TableName: TABLE_NAME,
       Item: {
-        user_id,
+        user_id: userId,
         template_id: uuid(),
-        template_message,
-        template_name,
+        template_message: templateMessage,
+        template_name: templateName,
         created_at: Date.now(),
-        idempotent_key,
+        idempotent_key: idempotentKey,
       },
     };
+
     await docClient.put(params);
 
     return handleSuccess(params.Item);
@@ -61,4 +48,4 @@ const createTemplate = async (event, context) => {
   }
 };
 
-exports.handler = commonMiddleware(createTemplate);
+exports.handler = commonMiddleware(create);
