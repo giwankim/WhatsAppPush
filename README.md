@@ -57,13 +57,12 @@
     - [x] Parse and validate the message from request parameter; otherwise, return appropriate error messages along with the appropriate HTTP status code.
     - [x] Query the message template record based on the partition key and sort key.
 
-- [ ] Define a lambda function named `ListTemplates` and associate a handler that would help list all message templates available to a user. Add an API route `/templates/{user_id}`.
-    - [ ] Create a handler that contains the business logic to list message template records by user ID.
-    - [ ] Parse and validate request paramaters; otherwise, return appropriate error messages along with the appropriate HTTP status code.
-    - [ ] Query templates based on user ID and return the templates list to the client.
+- [x] Implement lambda function `ListTemplates` associated with the route GET `/templates/{user_id}` and a handler that lists all message templates available to a user.
+    - [x] Parse and validate request paramaters; otherwise, return appropriate error messages along with the appropriate HTTP status code.
+    - [x] Query templates based on user ID and return the templates list to the client.
 
 - [ ] Test all the endpoint by invoking the lambda functions locally with the required data, then verify that it is returning as expected or not.
 
-- [ ] Deploy using the Serverless Framework, then test the service endpoints using Postmant or curl commands.
+- [x] Deploy using the Serverless Framework, then test the service endpoints using Postmant or curl commands.
 
 ### Milestone 3

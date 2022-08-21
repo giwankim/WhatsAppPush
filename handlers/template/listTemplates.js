@@ -2,7 +2,7 @@
 const HttpStatus = require('http-status');
 const docClient = require('../../libs/dynamodb-client');
 const commonMiddleware = require('../../libs/middleware/commonMiddleware');
-const { validateHttpRequest, handleSuccess, handleError } = require('../../libs/response-handler');
+const { handleSuccess, handleError } = require('../../libs/response-handler');
 
 const list = async (event) => {
   if (!event.pathParameters) {
@@ -15,7 +15,19 @@ const list = async (event) => {
       `[Template:Delete:Error]:${HttpStatus[HttpStatus.BAD_REQUEST]}: "Invalid parameter"`
     );
   }
-  const params = {};
+  try {
+    const params = {
+      TableName: process.env.TEMPLATES_TABLE_NAME,
+      KeyConditionExpression: 'user_id = :user_id',
+      ExpressionAttributeValues: {
+        ':user_id': userId,
+      },
+    };
+    const result = await docClient.query(params);
+    return handleSuccess(result.Items || []);
+  } catch (error) {
+    return handleError(HttpStatus.INTERNAL_SERVER_ERROR, `[Template:List:Error]: ${error}`);
+  }
 };
 
-exports.list = commonMiddleware(list);
+exports.handler = commonMiddleware(list);
