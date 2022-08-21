@@ -32,47 +32,8 @@ provider:
         - ${file(framework/iam/TemplatesTableIAM.yml):TemplatesTableIAM}
 
 functions:
-  CreateTemplates:
-    handler: handlers/template/createTemplates.handler
-    description: Function to handle business logic to create templates
-    events:
-      - http:
-          path: /templates
-          method: POST
-          cors: true
-  UpdateTemplates:
-    handler: handlers/template/updateTemplates.handler
-    description: Function to handle business logic to update templates
-    events:
-      - http:
-          path: /templates/{userId}/{templateId}
-          method: PUT
-          cors: true
-  DeleteTemplates:
-    handler: handlers/template/deleteTemplates.handler
-    description: Function to handle business logic to delete templates
-    events:
-      - http:
-          path: /templates/{userId}/{templateId}
-          method: DELETE
-          cors: true
-  DetailsTemplates:
-    handler: handlers/template/detailsTemplates.handler
-    description: Function to handle business logic to get template details
-    events:
-      - http:
-          path: /templates/{userId}/{templateId}
-          method: GET
-          cors: true
-  ListTemplates:
-    handler: handlers/template/listTemplates.handler
-    description: Function to handle business logic to get all templates
-    events:
-      - http:
-          path: /templates/{userId}
-          method: GET
-          cors: true
-
+  - ${file(framework/functions/functions-templates.yml)}
+  
 resources:
   Resources:
     TemplatesTable: ${file(framework/resources/TemplatesTable.yml):TemplatesTable}
