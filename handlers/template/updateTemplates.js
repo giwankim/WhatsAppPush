@@ -4,12 +4,12 @@ const docClient = require('../../libs/dynamodb-client');
 const commonMiddleware = require('../../libs/middleware/commonMiddleware');
 const updateTemplateSchema = require('../../libs/schema/update-template.schema');
 const { validateHttpRequest, handleSuccess, handleError } = require('../../libs/response-handler');
-const { getTemplate } = require('../../libs/templates/getTemplate');
 
 const update = async (event) => {
   if (!event.pathParameters) {
     throw new Error('Missing Parameter');
   }
+
   let value;
   try {
     value = validateHttpRequest(event, updateTemplateSchema);
@@ -29,7 +29,11 @@ const update = async (event) => {
       );
     }
 
-    const result = await getTemplate(userId, templateId);
+    const getParams = {
+      TableName: process.env.TEMPLATES_TABLE_NAME,
+      Key: { user_id: userId, template_id: templateId },
+    };
+    const result = await docClient.get(getParams);
     if (result && !result.Item) {
       throw new Error('Template not found');
     }
@@ -45,6 +49,7 @@ const update = async (event) => {
       ReturnValues: 'ALL_NEW',
     };
     const updateResult = await docClient.update(params);
+
     return handleSuccess(updateResult);
   } catch (error) {
     return handleError(

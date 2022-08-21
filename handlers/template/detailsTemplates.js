@@ -8,14 +8,15 @@ const details = async (event) => {
   if (!event.pathParameters) {
     throw new Error('Missing Parameter');
   }
+  const { templateId, userId } = event.pathParameters;
+  if (!templateId || !userId) {
+    return handleError(
+      HttpStatus.BAD_REQUEST,
+      `[Template:Details:Error]:${HttpStatus[HttpStatus.BAD_REQUEST]}: "Invalid parameter"`
+    );
+  }
+
   try {
-    const { templateId, userId } = event.pathParameters;
-    if (!templateId || !userId) {
-      return handleError(
-        HttpStatus.BAD_REQUEST,
-        `[Template:Details:Error]:${HttpStatus[HttpStatus.BAD_REQUEST]}: "Invalid parameter"`
-      );
-    }
     const params = {
       TableName: process.env.TEMPLATES_TABLE_NAME,
       Key: {

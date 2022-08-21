@@ -5,9 +5,11 @@ const docClient = require('../../libs/dynamodb-client');
 const commonMiddleware = require('../../libs/middleware/commonMiddleware');
 const createTemplatesSchema = require('../../libs/schema/create-template.schema');
 const { validateHttpRequest, handleSuccess, handleError } = require('../../libs/response-handler');
-const { queryTemplates } = require('../../libs/templates/queryTemplates');
 
 const create = async (event) => {
+  if (!event.body) {
+    throw new Error('Missing parameter');
+  }
   let value;
   try {
     value = validateHttpRequest(event, createTemplatesSchema);
@@ -21,7 +23,17 @@ const create = async (event) => {
   try {
     const { templateName, templateMessage, userId, idempotentKey } = value;
 
-    const queryResult = await queryTemplates(userId, idempotentKey);
+    const queryParams = {
+      TableName: process.env.TEMPLATES_TABLE_NAME,
+      Limit: 1,
+      KeyConditionExpression: 'user_id = :user_id',
+      FilterExpression: 'idempotent_key = :idempotent_key',
+      ExpressionAttributeValues: {
+        ':user_id': userId,
+        ':idempotent_key': idempotentKey,
+      },
+    };
+    const queryResult = await docClient.query(queryParams);
     if (!!queryResult && queryResult.Count && queryResult.Items.length) {
       return handleSuccess(queryResult.Items[0]);
     }

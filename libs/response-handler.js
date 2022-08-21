@@ -3,9 +3,6 @@
 const HttpStatus = require('http-status');
 
 exports.validateHttpRequest = (event, schema) => {
-  if (!event.body) {
-    throw new Error('Missing parameter');
-  }
   const { error, value } = schema.validate(event.body);
   if (error) {
     throw new Error(error);

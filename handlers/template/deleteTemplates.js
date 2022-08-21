@@ -15,6 +15,7 @@ const deleteTemplates = async (event) => {
       `[Template:Delete:Error]:${HttpStatus[HttpStatus.BAD_REQUEST]}: "Invalid parameter"`
     );
   }
+
   try {
     const result = await docClient.get({
       TableName: process.env.TEMPLATES_TABLE_NAME,

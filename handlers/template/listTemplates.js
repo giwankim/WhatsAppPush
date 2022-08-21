@@ -15,6 +15,7 @@ const list = async (event) => {
       `[Template:Delete:Error]:${HttpStatus[HttpStatus.BAD_REQUEST]}: "Invalid parameter"`
     );
   }
+
   try {
     const params = {
       TableName: process.env.TEMPLATES_TABLE_NAME,
@@ -24,6 +25,7 @@ const list = async (event) => {
       },
     };
     const result = await docClient.query(params);
+
     return handleSuccess(result.Items || []);
   } catch (error) {
     return handleError(HttpStatus.INTERNAL_SERVER_ERROR, `[Template:List:Error]: ${error}`);
