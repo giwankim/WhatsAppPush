@@ -1,5 +1,6 @@
 .env
 .DS_Store
+.webpack
 
 # package directories
 node_modules

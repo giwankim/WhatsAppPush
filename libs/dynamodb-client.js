@@ -31,10 +31,10 @@ exports.query = (params) => {
 //   };
 // };
 
-exports.update = async (params) => {
-  await docClient.update(params).promise();
+exports.update = (params) => {
+  return docClient.update(params).promise();
 };
 
-exports.delete = async (params) => {
-  await docClient.delete(params).promise();
+exports.delete = (params) => {
+  return docClient.delete(params).promise();
 };

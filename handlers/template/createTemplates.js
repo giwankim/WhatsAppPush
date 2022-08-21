@@ -7,8 +7,6 @@ const createTemplatesSchema = require('../../libs/schema/create-template.schema'
 const { validateHttpRequest, handleSuccess, handleError } = require('../../libs/response-handler');
 const { queryTemplates } = require('../../libs/templates/queryTemplates');
 
-const TABLE_NAME = process.env.TEMPLATES_TABLE_NAME;
-
 const create = async (event) => {
   let value;
   try {
@@ -29,7 +27,7 @@ const create = async (event) => {
     }
 
     const params = {
-      TableName: TABLE_NAME,
+      TableName: process.env.TEMPLATES_TABLE_NAME,
       Item: {
         user_id: userId,
         template_id: uuid(),
