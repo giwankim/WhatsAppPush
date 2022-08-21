@@ -49,11 +49,11 @@
     - [x] Parse and validate the request body to make sure that valid message template data is going to be updated. Otherwise, return an appropriate validation error message response along with the appropriate HTTP status code.
     - [x] Use the DynamoDB update method and return updated details to the clients.
 
-- [ ] To provide a template delete feature, define a lambda function `DeleteTemplates` associated with DELETE API route `/templates/{user_id}/{template_id}`.
-    - [ ] Validate incoming request parameters; return appropriate HTTP status code for errors.
-    - [ ] After successfully deleting a record, this handler returns HTTP status code 200 (OK).
+- [x] To provide a template delete feature, define a lambda function `DeleteTemplates` associated with DELETE API route `/templates/{user_id}/{template_id}`.
+    - [x] Validate incoming request parameters; return appropriate HTTP status code for errors.
+    - [x] After successfully deleting a record, this handler returns HTTP status code 200 (OK).
 
-- [ ]  Add lambda function `DetailsTemplates` and associate a handler that returns the message template details. Add a GET API route `/templates/{user_id}{template_id}`.
+- [ ] Add lambda function `DetailsTemplates` to the route GET `/templates/{user_id}{template_id}`; associate a handler that returns the message template details.
     - [ ] Parse and validate the message "required parameter" form request parameter; otherwise, return appropriate error messages along with the appropriate HTTP status code.
     - [ ] Query the message template record base on the partition key and sort key from the Templates table.
 

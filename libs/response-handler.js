@@ -2,7 +2,7 @@
 
 const HttpStatus = require('http-status');
 
-const validateHttpRequest = (event, schema) => {
+exports.validateHttpRequest = (event, schema) => {
   if (!event.body) {
     throw new Error('Missing parameter');
   }
@@ -13,7 +13,7 @@ const validateHttpRequest = (event, schema) => {
   return value;
 };
 
-const handleSuccess = (data) => {
+exports.handleSuccess = (data) => {
   return {
     statusCode: HttpStatus.OK,
     headers: { 'Content-Type': 'application/json' },
@@ -21,12 +21,10 @@ const handleSuccess = (data) => {
   };
 };
 
-const handleError = (statusCode, message, ...rest) => {
+exports.handleError = (statusCode, message, ...rest) => {
   return {
     statusCode,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ error: message, ...rest }),
   };
 };
-
-module.exports = { validateHttpRequest, handleSuccess, handleError };
