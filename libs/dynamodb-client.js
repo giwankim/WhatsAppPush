@@ -16,20 +16,23 @@ exports.query = (params) => {
   return docClient.query(params).promise();
 };
 
-// exports.scan = async (params) => {
-//   let output;
-//   const items = [];
-//   do {
-//     output = await docClient.scan(params).promise();
-//     if (output.Items) {
-//       items.push(...output.Items);
-//     }
-//   } while ();
-//   return {
-//     lastEvaluatedKey: output.LastEvaluatedKey,
-//     items,
-//   };
-// };
+exports.scan = async (params) => {
+  let output;
+  const items = [];
+  do {
+    output = await docClient.scan(params).promise();
+    if (output.Items) {
+      items.push(...output.Items);
+    }
+  } while (
+    params.ExclusiveStartKey === output.lastEvaluatedKey &&
+    (!params.Limit || params.Limit < items.length)
+  );
+  return {
+    lastEvaluatedKey: output.LastEvaluatedKey,
+    items,
+  };
+};
 
 exports.update = (params) => {
   return docClient.update(params).promise();
