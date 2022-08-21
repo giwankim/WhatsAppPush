@@ -53,9 +53,9 @@
     - [x] Validate incoming request parameters; return appropriate HTTP status code for errors.
     - [x] After successfully deleting a record, this handler returns HTTP status code 200 (OK).
 
-- [ ] Add lambda function `DetailsTemplates` to the route GET `/templates/{user_id}{template_id}`; associate a handler that returns the message template details.
-    - [ ] Parse and validate the message "required parameter" form request parameter; otherwise, return appropriate error messages along with the appropriate HTTP status code.
-    - [ ] Query the message template record base on the partition key and sort key from the Templates table.
+- [x] Add lambda function `DetailsTemplates` to the route GET `/templates/{user_id}{template_id}`; associate a handler that returns the message template details.
+    - [x] Parse and validate the message from request parameter; otherwise, return appropriate error messages along with the appropriate HTTP status code.
+    - [x] Query the message template record based on the partition key and sort key.
 
 - [ ] Define a lambda function named `ListTemplates` and associate a handler that would help list all message templates available to a user. Add an API route `/templates/{user_id}`.
     - [ ] Create a handler that contains the business logic to list message template records by user ID.

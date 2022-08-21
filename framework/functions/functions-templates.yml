@@ -6,22 +6,22 @@ CreateTemplates:
         path: /templates
         method: POST
         cors: true
-
+        
 UpdateTemplates:
   handler: handlers/template/updateTemplates.handler
   description: Function to handle business logic to update templates
   events:
     - http:
-        path: /templates/{user_id}/{template_id}
+        path: /templates/{userId}/{templateId}
         method: PUT
         cors: true
 
 DeleteTemplates:
-  handler: handlers/template/deleteTemplates.clehandler
+  handler: handlers/template/deleteTemplates.handler
   description: Function to handle business logic to delete templates
   events:
     - http:
-        path: /templates/{user_id}/{template_id}
+        path: /templates/{userId}/{templateId}
         method: DELETE
         cors: true
 
@@ -30,15 +30,15 @@ DetailsTemplates:
   description: Function to handle business logic to get template details
   events:
     - http:
-        path: /templates/{user_id}/{template_id}
+        path: /templates/{userId}/{templateId}
         method: GET
         cors: true
 
 ListTemplates:
   handler: handlers/template/listTemplates.handler
-  description: Function to handle business logic to list templates
+  description: Function to handle business logic to get all templates
   events:
     - http:
-        path: /templates/{user_id}
+        path: /templates/{userId}
         method: GET
         cors: true
