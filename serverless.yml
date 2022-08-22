@@ -2,10 +2,6 @@ service: whatsapppush-${self:custom.name}
 
 frameworkVersion: '3'
 
-plugins:
-  - serverless-export-env
-  - serverless-webpack
-
 custom:
   name: giwankim
   webpack:
@@ -14,9 +10,12 @@ custom:
     individually: true
   export-env:
     overwrite: true
+  logRetentionInDays: 10
   TemplatesTable:
     name: !Ref TemplatesTable
     arn: !GetAtt TemplatesTable.Arn
+  RecipientFilesS3Bucket:
+    name: 
 
 provider:
   name: aws
@@ -24,8 +23,10 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: ap-northeast-2
   versionFunctions: false
+
   environment:
     TEMPLATES_TABLE_NAME: ${self:custom.TemplatesTable.name}
+
   iam:
     role:
       statements:
@@ -37,3 +38,24 @@ functions:
 resources:
   Resources:
     TemplatesTable: ${file(framework/resources/TemplatesTable.yml):TemplatesTable}
+
+    RecipientFilesS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.RecipientFilesS3Bucket.name}
+
+    RecipientFilesS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref RecipientFilesS3Bucket
+        PolicyDocument:
+          Statement:
+            - Effect: Allow
+              Principal: '*'
+              Action: s3:GetObject
+              Resource: 
+
+plugins:
+  - serverless-export-env
+  - serverless-webpack
+  - serverless-plugin-log-retention

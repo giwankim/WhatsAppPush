@@ -1,0 +1,4 @@
+RecipientFilesS3Bucket:
+  Type: AWS::S3::Bucket
+  Properties:
+    BucketName: ${self:custom.RecipientFilesS3Bucket.name}

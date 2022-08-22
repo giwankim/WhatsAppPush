@@ -1,0 +1,5 @@
+RecipientFilesS3BucketIAM:
+  Effect: Allow
+  Action:
+    - s3:PutObject
+  Resource: 

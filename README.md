@@ -66,3 +66,11 @@
 - [x] Deploy using the Serverless Framework, then test the service endpoints using Postmant or curl commands.
 
 ### Milestone 3
+
+- [ ] Provision S3 bucket where users will be able to upload recipient files.
+    - DNS compliant
+    - CORS configuration
+    - Allow POST method
+- [ ] POST `/upload-url/{user_id}`
+    - Parse and validate request body containing `file_name` which will be used as the key while creating a signed URL.
+    - Lambda function should have a role that can put an object into an S3 bucket.
