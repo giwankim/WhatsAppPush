@@ -28,9 +28,15 @@
 - Amazon SQS
 - Amazon S3
 
-## TODO
+## Log
 
 ### Milestone 2
+
+#### Requirements
+
+- REST API endpoints to manage and save message templates in DynamoDB
+
+#### TODO
 
 - [x] DynamoDB table called `Templates`.
     - Partition key: `user_id` of type string
@@ -66,3 +72,26 @@
 - [x] Deploy using the Serverless Framework, then test the service endpoints using Postmant or curl commands.
 
 ### Milestone 3
+
+#### Requirements
+
+- Build a feature that allows users to upload recipient list files into an AWS S3 private bucket using AWS pre-signed URLs and lambda functions
+- Pre-signed URL will be generated upon request for a new endpoint. Then endpoint will accept the file name that our user wants to upload, then return a pre-signed URL. Clients will use this URL to upload any recipient list CSV or XLSX files.
+
+**Note**
+There are number of ways to create credentials that can be used to create a pre-signed URL:
+- AWS IAM credentials valid for up to 6 hours
+- AWS STS credentials valid for up to 36 hours
+- AWS IAM User credentials valid for up to 7 days
+
+For this project we will be using AWS IAM user credentials (Signature Version 4).
+
+#### TODO
+
+- [ ] Allocate an S3 bucket to receive file uploads
+    - [ ] Name should be DNS compliant [0-9A-Za-z] and !, -, _, ., *, ', (,)
+    - [ ] CORS configuration for GET and POST methods
+- [ ] Define a lambda function `GetSignedUrl` associated with the route POST `/upload-url/{userId}` to create a presigned URL to upload a file.
+    - [ ] Parse and validate the request body parameter `file_name` which will be used for a key while creating a presigned URL
+    - [ ] Lambda function should have an role that can put objects into the allocated S3 bucket
+    - [ ] Use AWS SDK to create a S3 client and use the `putObject` function
