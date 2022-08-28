@@ -28,7 +28,7 @@
 - Amazon SQS
 - Amazon S3
 
-## Log
+## Development Log
 
 ### Milestone 2
 
@@ -72,8 +72,6 @@
 - [x] Deploy using the Serverless Framework, then test the service endpoints using Postmant or curl commands.
 
 ### Milestone 3
-
-<<<<<<< HEAD
 #### Requirements
 
 - Build a feature that allows users to upload recipient list files into an AWS S3 private bucket using AWS pre-signed URLs and lambda functions
@@ -89,19 +87,10 @@ For this project we will be using AWS IAM user credentials (Signature Version 4)
 
 #### TODO
 
-- [ ] Allocate an S3 bucket to receive file uploads
-    - [ ] Name should be DNS compliant [0-9A-Za-z] and !, -, _, ., *, ', (,)
+- [x] Allocate an S3 bucket to receive file uploads
+    - [x] Name should be DNS compliant [0-9A-Za-z] and !, -, _, ., *, ', (,)
     - [ ] CORS configuration for GET and POST methods
 - [ ] Define a lambda function `GetSignedUrl` associated with the route POST `/upload-url/{userId}` to create a presigned URL to upload a file.
     - [ ] Parse and validate the request body parameter `file_name` which will be used for a key while creating a presigned URL
-    - [ ] Lambda function should have an role that can put objects into the allocated S3 bucket
+    - [x] Lambda function should have an role that can put objects into the allocated S3 bucket
     - [ ] Use AWS SDK to create a S3 client and use the `putObject` function
-=======
-- [ ] Provision S3 bucket where users will be able to upload recipient files.
-    - DNS compliant
-    - CORS configuration
-    - Allow POST method
-- [ ] POST `/upload-url/{user_id}`
-    - Parse and validate request body containing `file_name` which will be used as the key while creating a signed URL.
-    - Lambda function should have a role that can put an object into an S3 bucket.
->>>>>>> cc74f415d6b105b397a416a7cc0dcc6a914fe081
