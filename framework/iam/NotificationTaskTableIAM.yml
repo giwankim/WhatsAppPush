@@ -1,0 +1,7 @@
+NotificationTaskTableIAM:
+  Effect: Allow
+  Action:
+    - dynamodb:Query
+    - dynamodb:PutItem
+  Resource:
+    - ${self:custom.NotificationTaskTable.arn}
