@@ -1,0 +1,8 @@
+GetSignedUrl:
+  handler: handlers/upload/getSignedUrl.handler
+  description: Function to get s3 bucket predsigned url to upload recipient file
+  events:
+    - http:
+        path: /upload-url/{userId}
+        method: POST
+        cors: true

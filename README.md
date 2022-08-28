@@ -90,7 +90,7 @@ For this project we will be using AWS IAM user credentials (Signature Version 4)
 - [x] Allocate an S3 bucket to receive file uploads
     - [x] Name should be DNS compliant [0-9A-Za-z] and !, -, _, ., *, ', (,)
     - [ ] CORS configuration for GET and POST methods
-- [ ] Define a lambda function `GetSignedUrl` associated with the route POST `/upload-url/{userId}` to create a presigned URL to upload a file.
-    - [ ] Parse and validate the request body parameter `file_name` which will be used for a key while creating a presigned URL
+- [x] Define a lambda function `GetSignedUrl` associated with the route POST `/upload-url/{userId}` to create a presigned URL to upload a file.
+    - [x] Parse and validate the request body parameter `file_name` which will be used for a key while creating a presigned URL
     - [x] Lambda function should have an role that can put objects into the allocated S3 bucket
-    - [ ] Use AWS SDK to create a S3 client and use the `putObject` function
+    - [x] Use AWS SDK to create a S3 client and use the `putObject` function
