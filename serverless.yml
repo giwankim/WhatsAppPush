@@ -10,12 +10,16 @@ custom:
     individually: true
   export-env:
     overwrite: true
-  logRetentionInDays: 14
+  logRetentionInDays: 7
   TemplatesTable:
     name: !Ref TemplatesTable
     arn: !GetAtt TemplatesTable.Arn
   RecipientFilesBucket:
     name: whatsapppush-recipient-files-gwk-${self:provider.stage}
+  WhatsAppMessageQueue:
+    url: !Ref WhatsAppMessageQueue
+    name: !GetAtt WhatsAppMessageQueue.QueueName
+    arn: !GetAtt WhatsAppMessageQueue.Arn
   NotificationTaskTable:
     name: !Ref NotificationTaskTable
     arn: !GetAtt NotificationTaskTable.Arn
@@ -26,15 +30,19 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: ap-northeast-2
   versionFunctions: false
-  environment:
-    TEMPLATES_TABLE_NAME: ${self:custom.TemplatesTable.name}
-    RECIPIENT_FILES_BUCKET_NAME: ${self:custom.RecipientFilesBucket.name}
-    NOTIFICATION_TASK_TABLE_NAME: ${self:custom.NotificationTaskTable.name}
   iam:
     role:
       statements:
         - ${file(framework/iam/TemplatesTableIAM.yml):TemplatesTableIAM}
         - ${file(framework/iam/RecipientFilesBucketIAM.yml):RecipientFilesBucketIAM}
+        - ${file(framework/iam/WhatsAppMessageQueueIAM.yml):WhatsAppMessageQueueIAM}
+        - ${file(framework/iam/NotificationTaskTableIAM.yml):NotificationTaskTableIAM}
+
+  environment:
+    TEMPLATES_TABLE_NAME: ${self:custom.TemplatesTable.name}
+    RECIPIENT_FILES_BUCKET_NAME: ${self:custom.RecipientFilesBucket.name}
+    WHATSAPP_MESSAGE_QUEUE_URL: ${self:custom.WhatsAppMessageQueue.url}
+    NOTIFICATION_TASK_TABLE_NAME: ${self:custom.NotificationTaskTable.name}
 
 functions:
   - ${file(framework/functions/functions-templates.yml)}
@@ -44,10 +52,10 @@ resources:
   Resources:
     TemplatesTable: ${file(framework/resources/TemplatesTable.yml):TemplatesTable}
     RecipientFilesBucket: ${file(framework/resources/RecipientFilesBucket.yml):RecipientFilesBucket}
-    # WhatsAppMessageQueue: ${file(framework/resources/WhatsAppMessageQueue.yml):WhatsAppMessageQueue}
+    WhatsAppMessageQueue: ${file(framework/resources/WhatsAppMessageQueue.yml):WhatsAppMessageQueue}
     NotificationTaskTable: ${file(framework/resources/NotificationTaskTable.yml):NotificationTaskTable}
 
 plugins:
   - serverless-export-env
-  - serverless-webpack
   - serverless-plugin-log-retention
+  - serverless-webpack

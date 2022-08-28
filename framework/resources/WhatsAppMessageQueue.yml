@@ -1,0 +1,4 @@
+WhatsAppMessageQueue:
+  Type: AWS::SQS::Queue
+  Properties:
+    QueueName: message-queue-${self:provider.stage}
