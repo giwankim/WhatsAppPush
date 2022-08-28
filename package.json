@@ -4,8 +4,7 @@
   "description": "",
   "main": "handlers/template.js",
   "scripts": {
-    "dotenv": "sls export-env --all",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dotenv": "sls export-env --all"
   },
   "license": "MIT",
   "devDependencies": {
@@ -17,6 +16,7 @@
     "git-list-updated": "^1.2.1",
     "prettier": "^2.7.1",
     "serverless": "^3.21.0",
+    "serverless-bundle": "^5.5.0",
     "serverless-export-env": "^2.2.0",
     "serverless-webpack": "^5.8.0"
   },

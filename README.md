@@ -72,6 +72,7 @@
 - [x] Deploy using the Serverless Framework, then test the service endpoints using Postmant or curl commands.
 
 ### Milestone 3
+
 #### Requirements
 
 - Build a feature that allows users to upload recipient list files into an AWS S3 private bucket using AWS pre-signed URLs and lambda functions
@@ -94,3 +95,21 @@ For this project we will be using AWS IAM user credentials (Signature Version 4)
     - [x] Parse and validate the request body parameter `file_name` which will be used for a key while creating a presigned URL
     - [x] Lambda function should have an role that can put objects into the allocated S3 bucket
     - [x] Use AWS SDK to create a S3 client and use the `putObject` function
+
+### Milestone 4
+
+#### Requirements
+
+Implement a lambda function called `CreateNotification` that reads recipient list in CSV/XLSX format; parses and extracts recipient details using `csvtojson` and `node-xlsx`; then publishes the payload which includes the message template and phone numbers onto AWS SQS for further processing.
+
+#### TODO
+
+- [x] Create SQS queue called `WhatsAppMessageQueue`.
+    - [x] Setup appropriate permissions to publish messages to the queue
+- [x] Create a DynamoDB table called `NotificationTask` that stores notification task details such as message, message template, recipient, and other relevant fields submitted by users.
+    - [x] Create a composite primary key with partition key called `user_id` of type string and `notification_id` as sort key of type string.
+- [ ] Provide an endpoint to which users will submit notification tasks.This endpoint will accept the details about recipient, message text, and other relevant fields.
+    - [ ] Handle both bulk and individual message delivery tasks. The route for both operations should be the same, the difference being the request body paramters.
+    - [ ] Parse and validate the POST request body from the event object; otherewise return the appropriate error messages along with the appropriate HTTP status code.
+    - [ ] Store submitted notification task details such as message, recipient or recipient file, and other properties into the `NotificationTask` table.
+- [ ] Implement `ListNotification` associated with the route GET `/notification/{userId}` that lists all notification tasks by `user_id` from the `NotificationTask` table.
