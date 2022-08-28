@@ -25,8 +25,10 @@
     "@middy/core": "^3.2.0",
     "@middy/http-error-handler": "^3.2.0",
     "@middy/http-json-body-parser": "^3.2.0",
+    "csvtojson": "^2.0.10",
     "http-errors": "^2.0.0",
     "http-status": "^1.5.2",
+    "node-xlsx": "^0.21.0",
     "serverless-plugin-log-retention": "^2.0.0",
     "uuid": "^8.3.2"
   },

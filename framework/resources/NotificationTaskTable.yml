@@ -1,15 +1,15 @@
-TemplatesTable:
+NotificationTaskTable:
   Type: AWS::DynamoDB::Table
   Properties:
-    TableName: TemplatesTable-${self:provider.stage}
+    TableName: NotificationTaskTable-${self:provider.stage}
     AttributeDefinitions:
       - AttributeName: user_id
         AttributeType: S
-      - AttributeName: template_id
+      - AttributeName: notification_id
         AttributeType: S
     KeySchema:
       - AttributeName: user_id
         KeyType: HASH
-      - AttributeName: template_id
+      - AttributeName: notification_id
         KeyType: RANGE
     BillingMode: PAY_PER_REQUEST

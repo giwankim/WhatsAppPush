@@ -15,7 +15,10 @@ custom:
     name: !Ref TemplatesTable
     arn: !GetAtt TemplatesTable.Arn
   RecipientFilesBucket:
-    name: whatsapppush-recipient-files-gwk
+    name: whatsapppush-recipient-files-gwk-${self:provider.stage}
+  NotificationTaskTable:
+    name: !Ref NotificationTaskTable
+    arn: !GetAtt NotificationTaskTable.Arn
 
 provider:
   name: aws
@@ -26,6 +29,7 @@ provider:
   environment:
     TEMPLATES_TABLE_NAME: ${self:custom.TemplatesTable.name}
     RECIPIENT_FILES_BUCKET_NAME: ${self:custom.RecipientFilesBucket.name}
+    NOTIFICATION_TASK_TABLE_NAME: ${self:custom.NotificationTaskTable.name}
   iam:
     role:
       statements:
@@ -40,6 +44,8 @@ resources:
   Resources:
     TemplatesTable: ${file(framework/resources/TemplatesTable.yml):TemplatesTable}
     RecipientFilesBucket: ${file(framework/resources/RecipientFilesBucket.yml):RecipientFilesBucket}
+    # WhatsAppMessageQueue: ${file(framework/resources/WhatsAppMessageQueue.yml):WhatsAppMessageQueue}
+    NotificationTaskTable: ${file(framework/resources/NotificationTaskTable.yml):NotificationTaskTable}
 
 plugins:
   - serverless-export-env
