@@ -47,6 +47,7 @@ provider:
 functions:
   - ${file(framework/functions/functions-templates.yml)}
   - ${file(framework/functions/functions-upload.yml)}
+  - ${file(framework/functions/functions-notification.yml)}
 
 resources:
   Resources:

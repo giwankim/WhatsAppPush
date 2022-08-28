@@ -1,0 +1,17 @@
+CreateNotification:
+  handler: handlers/notification/createNotification.handler
+  description: Function to handle business logic to create notification task
+  events:
+    - http:
+        path: /notification
+        method: POST
+        cors: true
+
+ListNotifications:
+  handler: handlers/notifcation/listNotifications.handler
+  description: Function to handle business logic to get notification list
+  events:
+    - http:
+        path: /notification/{userId}
+        method: GET
+        cors: true
