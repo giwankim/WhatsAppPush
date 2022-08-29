@@ -8,7 +8,7 @@ CreateNotification:
         cors: true
 
 ListNotifications:
-  handler: handlers/notifcation/listNotifications.handler
+  handler: handlers/notification/listNotifications.handler
   description: Function to handle business logic to get notification list
   events:
     - http:
