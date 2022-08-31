@@ -6,6 +6,12 @@ const { handleSuccess, handleError } = require('../../libs/response-handler');
 
 const list = async (event) => {
   const { userId } = event.pathParameters;
+  if (!userId) {
+    return handleError(
+      HttpStatus.BAD_REQUEST,
+      `[ListNotifications:List:Error]:${HttpStatus[HttpStatus.BAD_REQUEST]}: Invalid 'user_id'`
+    );
+  }
   try {
     const params = {
       TableName: process.env.NOTIFICATION_TASK_TABLE_NAME,

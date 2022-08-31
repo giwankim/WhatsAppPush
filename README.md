@@ -122,6 +122,8 @@ Implement a lambda function called `CreateNotification` that reads CSV/XLSX reci
         - sort key `notification_id` of type string
 - [ ] Provide an endpoint to which users will submit notification tasks. This endpoint will accept the details about recipient, message text, and other relevant fields.
     - [ ] Handle both bulk and individual message delivery tasks. The route for both operations should be the same, the difference being the request body paramters.
-    - [ ] Parse and validate the POST request body from the event object; otherewise return the appropriate error messages along with the appropriate HTTP status code.
+    - [ ] Parse and validate the POST request body from the event object; otherewise, return the appropriate error messages along with the appropriate HTTP status code.
     - [ ] Store submitted notification task details such as message, recipient or recipient file, and other properties into the `NotificationTask` table.
+    - [ ] If user uploaded recipient list file, parse the CSV/XLSX file and process the parsed data
+    - [ ] Send these notification task details to the `WhatsAppMessageQueue`
 - [x] Implement `ListNotification` associated with the route GET `/notification/{userId}` that lists all notification tasks by `user_id` from the `NotificationTask` table.
