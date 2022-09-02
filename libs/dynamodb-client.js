@@ -38,7 +38,6 @@ exports.scan = async (params) => {
   const items = [];
   do {
     output = await ddbDocClient.send(new ScanCommand(params));
-    // output = await docClient.scan(params).promise();
     if (output.Items) {
       items.push(...output.Items);
     }
