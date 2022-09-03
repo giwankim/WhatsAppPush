@@ -1,18 +1,12 @@
 'use strict';
-const S3 = require('aws-sdk/clients/s3');
+
 const HttpStatus = require('http-status');
 const commonMiddleware = require('../../libs/middleware/commonMiddleware');
-const getSignedUrlSchema = require('../../libs/schema/getSignedUrl.schema');
-const { handleSuccess, handleError } = require('../../libs/response-handler');
+const getSignedUrlSchema = require('../schema/getSignedUrl.schema');
+const { getPresignedPutObject } = require('../../libs/utils/s3-util');
+const { handleSuccess, handleError } = require('../../libs/utils/response-handler');
 
-const s3Client = new S3({
-  signatureVersion: 'v4',
-});
-
-const getSignedUrl = async (event) => {
-  if (!event.body || !event.pathParameters) {
-    throw new Error('Missing parameter');
-  }
+const getUploadUrl = async (event) => {
   const { userId } = event.pathParameters;
   if (!userId) {
     return handleError(
@@ -36,19 +30,19 @@ const getSignedUrl = async (event) => {
     const params = {
       Bucket: process.env.RECIPIENT_FILES_BUCKET_NAME,
       Key: filePath,
-      Expires: 6000, // URL expires in 10 minutes
     };
-    const url = await s3Client.getSignedUrlPromise('putObject', params);
+    const expiresIn = 6000; // URL expires in 10 minutes
+    const url = await getPresignedPutObject(params, expiresIn);
     return handleSuccess({
       signedUrl: url,
       s3FilePath: filePath,
     });
-  } catch (error) {
+  } catch (err) {
     return handleError(
       HttpStatus.INTERNAL_SERVER_ERROR,
-      `[Upload:GetSignedUrl:Error]: ${error.stack}`
+      `[Upload:GetSignedUrl:Error]: ${err.stack}`
     );
   }
 };
 
-exports.handler = commonMiddleware(getSignedUrl);
+exports.handler = commonMiddleware(getUploadUrl);

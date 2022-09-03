@@ -1,5 +1,5 @@
 GetSignedUrl:
-  handler: handlers/upload/getSignedUrl.handler
+  handler: src/upload/handlers/getSignedUrl.handler
   description: Function to get s3 bucket predsigned url to upload recipient file
   events:
     - http:

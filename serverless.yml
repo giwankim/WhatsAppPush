@@ -39,6 +39,7 @@ provider:
         - ${file(framework/iam/NotificationTaskTableIAM.yml):NotificationTaskTableIAM}
 
   environment:
+    REGION: ${self:provider.region}
     TEMPLATES_TABLE_NAME: ${self:custom.TemplatesTable.name}
     RECIPIENT_FILES_BUCKET_NAME: ${self:custom.RecipientFilesBucket.name}
     WHATSAPP_MESSAGE_QUEUE_URL: ${self:custom.WhatsAppMessageQueue.url}
