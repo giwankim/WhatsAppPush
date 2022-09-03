@@ -48,6 +48,7 @@ SDK: 4.3.2
 
 ### TemplatesTable
 
+| | |
 | --- | --- |
 | user_id | primary key |
 | template_id | sort key |
