@@ -46,7 +46,8 @@ SDK: 4.3.2
 
 ## Database
 
-|  TemplatesTable |   |
+### TemplatesTable
+
 | --- | --- |
 | user_id | primary key |
 | template_id | sort key |
@@ -138,3 +139,8 @@ Implement a lambda function called `CreateNotification` that reads CSV/XLSX reci
     - [ ] If user uploaded recipient list file, parse the CSV/XLSX file and process the parsed data
     - [ ] Send these notification task details to the `WhatsAppMessageQueue`
 - [x] Implement `ListNotification` associated with the route GET `/notification/{userId}` that lists all notification tasks by `user_id` from the `NotificationTask` table.
+
+
+### Refeactor
+
+- use `middy` middlewares to remove duplicated code and handle cross-cutting concerns
