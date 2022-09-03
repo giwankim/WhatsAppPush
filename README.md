@@ -44,6 +44,17 @@ SDK: 4.3.2
 ### AWS CLI Version
 ```aws-cli/2.7.27 Python/3.9.11 Darwin/21.6.0 exe/x86_64 prompt/off```
 
+## Database
+
+|  TemplatesTable |   |
+| --- | --- |
+| user_id | primary key |
+| template_id | sort key |
+| template_name |  |
+| template_message |  |
+| create_at |  |
+| idempotent_key |  |
+
 ## Development Log
 
 ### Milestone 1
@@ -56,18 +67,9 @@ Set up project and development environment as above.
 
 - REST API endpoints to manage and save message templates in DynamoDB
 
-|   |   |
-| --- | --- |
-| user_id | primary key |
-| template_id | sort key |
-| template_name |  |
-| template_message |  |
-| create_at |  |
-| idempotent_key |  |
-
 #### TODO
 
-- [x] Allocate DynamoDB table called `Templates`
+- [x] Allocate DynamoDB table called `TemplatesTable`
     - Partition key: `user_id` of type string
     - Sort key: `template_id` of type string
 
