@@ -56,6 +56,15 @@ Set up project and development environment as above.
 
 - REST API endpoints to manage and save message templates in DynamoDB
 
+|   |   |
+| --- | --- |
+| user_id | primary key |
+| template_id | sort key |
+| template_name |  |
+| template_message |  |
+| create_at |  |
+| idempotent_key |  |
+
 #### TODO
 
 - [x] Allocate DynamoDB table called `Templates`
