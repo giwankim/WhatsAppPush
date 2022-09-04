@@ -50,11 +50,11 @@ SDK: 4.3.2
 
 | | |
 | --- | --- |
-| user_id | primary key |
+| user_id | partition key |
 | template_id | sort key |
 | template_name |  |
 | template_message |  |
-| create_at |  |
+| created_at |  |
 | idempotent_key |  |
 
 ## Development Log
@@ -142,6 +142,6 @@ Implement a lambda function called `CreateNotification` that reads CSV/XLSX reci
 - [x] Implement `ListNotification` associated with the route GET `/notification/{userId}` that lists all notification tasks by `user_id` from the `NotificationTask` table.
 
 
-### Refeactor
+### WISH LIST
 
 - use `middy` middlewares to remove duplicated code and handle cross-cutting concerns

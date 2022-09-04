@@ -1,5 +1,5 @@
 CreateTemplates:
-  handler: handlers/template/createTemplates.handler
+  handler: src/template/handlers/createTemplate.handler
   description: Function to handle business logic to create templates
   events:
     - http:
