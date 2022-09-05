@@ -1,7 +1,16 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const getSignedUrlSchema = {
+  type: 'object',
+  properties: {
+    body: {
+      type: 'object',
+      properties: {
+        file_name: { type: 'string' },
+      },
+    },
+  },
+  required: ['body'],
+};
 
-module.exports = Joi.object({
-  file_name: Joi.string().required(),
-});
+module.exports = { getSignedUrlSchema };

@@ -30,6 +30,7 @@ const create = async (event) => {
       `[Template:Create:Error]:${HttpStatus[HttpStatus.BAD_REQUEST]}: ${error}`
     );
   }
+
   const { templateName, templateMessage, userId, idempotentKey } = value;
   try {
     const queryResult = await queryTemplates(userId, idempotentKey);

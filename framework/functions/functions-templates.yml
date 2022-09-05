@@ -4,7 +4,7 @@ CreateTemplates:
   events:
     - http:
         path: /templates
-        method: POST
+        method: post
         cors: true
         
 UpdateTemplates:
@@ -13,7 +13,7 @@ UpdateTemplates:
   events:
     - http:
         path: /templates/{userId}/{templateId}
-        method: PUT
+        method: put
         cors: true
 
 DeleteTemplates:
@@ -22,7 +22,7 @@ DeleteTemplates:
   events:
     - http:
         path: /templates/{userId}/{templateId}
-        method: DELETE
+        method: delete
         cors: true
 
 DetailsTemplates:
@@ -31,7 +31,7 @@ DetailsTemplates:
   events:
     - http:
         path: /templates/{userId}/{templateId}
-        method: GET
+        method: get
         cors: true
 
 ListTemplates:
@@ -40,5 +40,5 @@ ListTemplates:
   events:
     - http:
         path: /templates/{userId}
-        method: GET
+        method: get
         cors: true
