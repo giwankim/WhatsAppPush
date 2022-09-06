@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+const createTemplateSchema = {
   type: 'object',
   properties: {
     body: {
@@ -16,3 +16,5 @@ module.exports = {
   },
   required: ['body'],
 };
+
+module.exports = { createTemplateSchema };

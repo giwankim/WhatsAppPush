@@ -19,6 +19,13 @@ class Template {
     this.createdAt = createdAt;
   }
 
+  key() {
+    return {
+      user_id: this.userId,
+      template_id: this.templateId,
+    };
+  }
+
   toItem() {
     return {
       user_id: this.userId,

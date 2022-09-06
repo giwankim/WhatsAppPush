@@ -5,7 +5,7 @@ const ddbDocClient = require('../../libs/dynamodb-client');
 exports.createTemplate = async (template) => {
   try {
     await ddbDocClient.put({
-      TableName: process.env.TEMPLATE_TABLE_NAME,
+      TableName: process.env.TEMPLATES_TABLE_NAME,
       Item: template.toItem(),
     });
     return template;

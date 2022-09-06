@@ -1,9 +1,9 @@
 'use strict';
 
 const HttpStatus = require('http-status');
-const createTemplateSchema = require('../schema/createTemplate.schema');
 const { Template } = require('../entities');
 const { getTemplatesByUserId, createTemplate } = require('../queries');
+const { createTemplateSchema } = require('../schema');
 const { makeHandler } = require('../../libs/utils/handler-util');
 const { handleSuccess, handleError } = require('../../libs/utils/response-util');
 

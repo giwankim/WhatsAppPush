@@ -4,7 +4,7 @@ const HttpStatus = require('http-status');
 const { getPresignedPut } = require('../../libs/s3-client');
 const { handleSuccess, handleError } = require('../../libs/utils/response-util');
 const { makeHandler } = require('../../libs/utils/handler-util');
-const { getSignedUrlSchema } = require('../schema/getSignedUrl.schema');
+const { getSignedUrlSchema } = require('../schema');
 
 const handler = async (event) => {
   const { userId } = event.pathParameters;
