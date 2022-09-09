@@ -8,7 +8,7 @@ CreateTemplates:
         cors: true
         
 UpdateTemplates:
-  handler: handlers/template/updateTemplates.handler
+  handler: src/template/handlers/updateTemplate.handler
   description: Function to handle business logic to update templates
   events:
     - http:
@@ -26,7 +26,8 @@ DeleteTemplates:
         cors: true
 
 DetailsTemplates:
-  handler: handlers/template/detailsTemplates.handler
+  # handler: handlers/template/detailsTemplates.handler
+  handler: src/template/handler/getTemplateDetail.handler
   description: Function to handle business logic to get template details
   events:
     - http:

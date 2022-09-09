@@ -13,6 +13,9 @@ const handler = async (event) => {
   const templateObj = new Template({ templateName, templateMessage, userId, templateId });
   const { template, error } = await updateTemplate(templateObj);
   if (error) {
+    if (error === 'Template does not exist') {
+      return handleError(HttpStatus.BAD_REQUEST, error);
+    }
     return handleError(HttpStatus.INTERNAL_SERVER_ERROR, error);
   }
   return handleSuccess(template);

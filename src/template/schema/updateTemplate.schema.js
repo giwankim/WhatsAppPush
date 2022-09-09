@@ -9,6 +9,7 @@ const updateTemplateSchema = {
         templateName: { type: 'string' },
         templateMessage: { type: 'string' },
       },
+      required: ['templateName', 'templateMessage'],
     },
     pathParameters: {
       type: 'object',
