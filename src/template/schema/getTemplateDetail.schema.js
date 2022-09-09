@@ -6,10 +6,10 @@ const getTemplateDetailSchema = {
     pathParameters: {
       type: 'object',
       properties: {
-        user_id: { type: 'string' },
-        template_id: { type: 'string' },
+        userId: { type: 'string' },
+        templateId: { type: 'string' },
       },
-      required: ['user_id', 'template_id'],
+      required: ['userId', 'templateId'],
     },
   },
   required: ['pathParameters'],

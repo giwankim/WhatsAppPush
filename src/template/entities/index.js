@@ -1,5 +1,5 @@
 'use strict';
 
-const { Template } = require('./template');
+const { Template, templateFromItem } = require('./template');
 
-module.exports = { Template };
+module.exports = { Template, templateFromItem };
