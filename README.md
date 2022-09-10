@@ -140,8 +140,3 @@ Implement a lambda function called `CreateNotification` that reads CSV/XLSX reci
     - [ ] If user uploaded recipient list file, parse the CSV/XLSX file and process the parsed data
     - [ ] Send these notification task details to the `WhatsAppMessageQueue`
 - [x] Implement `ListNotification` associated with the route GET `/notification/{userId}` that lists all notification tasks by `user_id` from the `NotificationTask` table.
-
-
-### WISH LIST
-
-- use `middy` middlewares to remove duplicated code and handle cross-cutting concerns

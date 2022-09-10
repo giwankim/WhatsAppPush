@@ -8,7 +8,7 @@ const { getSignedUrlSchema } = require('../schema');
 
 const handler = async (event) => {
   const { userId } = event.pathParameters;
-  const { file_name: fileName } = event.body;
+  const { fileName } = event.body;
   const date = new Date().toJSON().slice(0, 10);
   const filePath = `${userId}/${date}/${fileName}`;
   const params = {

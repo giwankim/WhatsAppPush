@@ -2,6 +2,12 @@
 
 const { createTemplateSchema } = require('./createTemplate.schema');
 const { updateTemplateSchema } = require('./updateTemplate.schema');
-const { getTemplateDetailSchema } = require('./getTemplateDetail.schema');
+const { getTemplateSchema } = require('./getTemplate.schema');
+const { deleteTemplateSchema } = require('./deleteTemplate.schema');
 
-module.exports = { createTemplateSchema, updateTemplateSchema, getTemplateDetailSchema };
+module.exports = {
+  createTemplateSchema,
+  updateTemplateSchema,
+  getTemplateSchema,
+  deleteTemplateSchema,
+};

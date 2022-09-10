@@ -6,11 +6,19 @@ const getSignedUrlSchema = {
     body: {
       type: 'object',
       properties: {
-        file_name: { type: 'string' },
+        fileName: { type: 'string' },
       },
+      required: ['fileName'],
+    },
+    pathParameters: {
+      type: 'object',
+      properties: {
+        userId: { type: 'string' },
+      },
+      required: ['userId'],
     },
   },
-  required: ['body'],
+  required: ['body', 'pathParameters'],
 };
 
 module.exports = { getSignedUrlSchema };

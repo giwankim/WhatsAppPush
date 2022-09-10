@@ -9,7 +9,7 @@ class Template {
     userId,
     idempotentKey,
     templateId = uuid(),
-    createdAt = Date.now(),
+    createdAt = new Date(),
   }) {
     this.templateName = templateName;
     this.templateMessage = templateMessage;
