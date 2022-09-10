@@ -40,7 +40,7 @@ class Template {
       template_id: this.templateId,
       template_message: this.templateMessage,
       template_name: this.templateName,
-      created_at: this.createdAt,
+      created_at: this.createdAt.toISOString(),
       idempotent_key: this.idempotentKey,
     };
   }

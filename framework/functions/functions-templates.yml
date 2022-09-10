@@ -17,8 +17,7 @@ UpdateTemplates:
         cors: true
 
 DeleteTemplates:
-  handler: handlers/template/deleteTemplates.handler
-  # handler: src/templates/handlers.deleteTemplate.handler
+  handler: src/template/handlers/deleteTemplate.handler
   description: Function to handle business logic to delete templates
   events:
     - http:
