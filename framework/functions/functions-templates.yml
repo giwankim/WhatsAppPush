@@ -18,6 +18,7 @@ UpdateTemplates:
 
 DeleteTemplates:
   handler: handlers/template/deleteTemplates.handler
+  # handler: src/templates/handlers.deleteTemplate.handler
   description: Function to handle business logic to delete templates
   events:
     - http:
@@ -35,8 +36,7 @@ DetailsTemplates:
         cors: true
 
 ListTemplates:
-  handler: handlers/template/listTemplates.handler
-  # handler: src/template/handlers/getTemplates.handler
+  handler: src/template/handlers/getTemplates.handler
   description: Function to handle business logic to get all templates
   events:
     - http:

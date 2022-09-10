@@ -26,6 +26,14 @@ class Template {
     };
   }
 
+  pk() {
+    return this.userId;
+  }
+
+  sk() {
+    return this.templateId;
+  }
+
   toItem() {
     return {
       user_id: this.userId,
@@ -49,4 +57,25 @@ const templateFromItem = (item) => {
   });
 };
 
-module.exports = { Template, templateFromItem };
+class UserTemplate extends Template {
+  targetType() {
+    return 'User';
+  }
+
+  type() {
+    return 'UserTemplate';
+  }
+}
+
+const userTemplateFromItem = (attributes) => {
+  return new UserTemplate({
+    templateId: attributes.template_id,
+    templateName: attributes.template_name,
+    templateMessage: attributes.template_message,
+    userId: attributes.user_id,
+    idempotentKey: attributes.idempotent_key,
+    createdAt: new Date(attributes.created_at),
+  });
+};
+
+module.exports = { Template, UserTemplate, templateFromItem, userTemplateFromItem };
