@@ -1,6 +1,6 @@
 'use strict';
 
-const getTemplateDetailSchema = {
+const getTemplateSchema = {
   type: 'object',
   properties: {
     pathParameters: {
@@ -15,4 +15,4 @@ const getTemplateDetailSchema = {
   required: ['pathParameters'],
 };
 
-module.exports = { getTemplateDetailSchema };
+module.exports = { getTemplateSchema };

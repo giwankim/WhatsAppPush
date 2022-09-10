@@ -26,7 +26,7 @@ DeleteTemplates:
         cors: true
 
 DetailsTemplates:
-  handler: src/template/handlers/getTemplateDetail.handler
+  handler: src/template/handlers/getTemplate.handler
   description: Function to handle business logic to get template details
   events:
     - http:
@@ -36,6 +36,7 @@ DetailsTemplates:
 
 ListTemplates:
   handler: handlers/template/listTemplates.handler
+  # handler: src/template/handlers/getTemplates.handler
   description: Function to handle business logic to get all templates
   events:
     - http:
