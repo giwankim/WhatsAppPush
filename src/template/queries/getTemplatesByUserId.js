@@ -1,6 +1,7 @@
 'use strict';
 
 const ddbDocClient = require('../../libs/dynamodb-client');
+const { templateFromItem } = require('../entities');
 
 exports.getTemplatesByUserId = async (userId, idempotentKey) => {
   try {
@@ -16,7 +17,7 @@ exports.getTemplatesByUserId = async (userId, idempotentKey) => {
     };
     const response = await ddbDocClient.query(params);
     return {
-      templates: response.Items,
+      templates: response.Items.map((item) => templateFromItem(item)),
     };
   } catch (error) {
     console.log('Error retrieving templates by user_id and idempotent_key');

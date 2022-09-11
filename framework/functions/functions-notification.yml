@@ -1,5 +1,6 @@
 CreateNotification:
-  handler: handlers/notification/createNotification.handler
+  # handler: handlers/notification/createNotification.handler
+  handler: src/notification/handlers/createNotification.handler
   description: Function to handle business logic to create notification task
   events:
     - http:
@@ -9,6 +10,7 @@ CreateNotification:
 
 ListNotifications:
   handler: handlers/notification/listNotifications.handler
+  # handler: src/notification/handlers/getNotifications.handler
   description: Function to handle business logic to get notification list
   events:
     - http:

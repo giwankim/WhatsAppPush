@@ -1,14 +1,49 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
-
-module.exports = Joi.object({
-  user_id: Joi.string().required(),
-  message: Joi.string(),
-  message_template_id: Joi.string(),
-  recipient: Joi.string(),
-  recipient_list_file: Joi.string(),
-  idempotent_key: Joi.string().required(),
-})
-  .xor('message', 'message_template_id')
-  .xor('recipient', 'recipient_list_file');
+exports.createNotificationSchema = {
+  type: 'object',
+  properties: {
+    body: {
+      allOf: [
+        {
+          type: 'object',
+          properties: {
+            userId: { type: 'string' },
+            idempotentKey: { type: 'string' },
+          },
+          oneOf: [
+            {
+              properties: {
+                message: { type: 'string' },
+                recipient: { type: 'string' },
+              },
+              required: ['message', 'recipient'],
+            },
+            {
+              properties: {
+                message: { type: 'string' },
+                recipientListFile: { type: 'string' },
+              },
+              required: ['message', 'recipientListFile'],
+            },
+            {
+              properties: {
+                messageTemplateId: { type: 'string' },
+                recipient: { type: 'string' },
+              },
+              required: ['messageTemplateId', 'recipient'],
+            },
+            {
+              properties: {
+                messageTemplateId: { type: 'string' },
+                recipientListFile: { type: 'string' },
+              },
+              required: ['messageTemplateId', 'recipientListFile'],
+            },
+          ],
+        },
+      ],
+    },
+  },
+  required: ['body'],
+};

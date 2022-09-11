@@ -7,51 +7,14 @@
 - Users should be able to send messages individually. Consider a scenario where the user must send a message to only one of their clients.
 - Users should be able to see the message delivery status logs.
 
-## Tools
-
-### NodeJS
-
-```
-Node Version v16.17.0
-Npm Version v8.18.0
-```
-
-### Serverless Framework
-
-```
-Framework Core: 3.21.0 (local)
-Plugin: 6.2.2
-SDK: 4.3.2
-```
-
-### Libraries
-
-- `csv-parser`
-- `aws-sdk`
-- `joi`
-- `http-status`
-- `twilio-node`
-- `node-xlsx`
-
-### AWS Resources
-
-- AWS API Gateway
-- AWS Lambda
-- Amazon DynamoDB
-- Amazon SQS
-- Amazon S3
-
-### AWS CLI Version
-```aws-cli/2.7.27 Python/3.9.11 Darwin/21.6.0 exe/x86_64 prompt/off```
-
 ## Database
 
 ### TemplatesTable
 
 | | |
 | --- | --- |
-| user_id | partition key |
-| template_id | sort key |
+| user_id | PK |
+| template_id | SK |
 | template_name |  |
 | template_message |  |
 | created_at |  |
@@ -61,9 +24,14 @@ SDK: 4.3.2
 
 | | |
 | -- | -- |
+| user_id | PK |
+| notification_id | SK |
 | message | |
-| message template | |
+| message_template_id | |
 | recipient | |
+| recipient_list_file | |
+| created_at | |
+| idempotent_key |  |
 
 ## Development Log
 
@@ -118,12 +86,12 @@ SDK: 4.3.2
 
 - [x] Create SQS queue called `WhatsAppMessageQueue` with appropriate permissions to publish messages to the queue.
 
-- [x] Create a DynamoDB table called `NotificationTask` that stores notification task details such as message, message template, recipient, and other relevant fields submitted by users.
+- [x] Create a DynamoDB table called `NotificationTaskTable` that stores notification task details such as message, message template, recipient, and other relevant fields submitted by users.
     - [x] The table should have a composite primary key consisting of partition key `user_id` of type string and sort key `notification_id` of type string.
 
 - [ ] Provide an endpoint to which users will submit notification tasks. This endpoint will accept the details about recipient, message text, and other relevant fields.
     - [ ] Handle both bulk and individual message delivery tasks. The route for both operations should be the same, the difference being the request body paramters.
-    - [ ] Store submitted notification task details such as message, recipient or recipient file, and other properties into the `NotificationTask` table.
+    - [ ] Store submitted notification task details such as message, recipient or recipient file, and other properties into `NotificationTaskTable`.
     - [ ] If user uploaded recipient list file, parse the CSV/XLSX file and process the parsed data
     - [ ] Send these notification task details to the `WhatsAppMessageQueue`
 
