@@ -76,7 +76,7 @@
     - [x] Parse and validate the request body parameter `fileName` which will be used for a key while creating a presigned URL
     - [x] Lambda function should have an role that can put objects into the allocated S3 bucket
 
-### Enqueue message requests
+### Enqueue notification messages
 
 #### Requirements
 

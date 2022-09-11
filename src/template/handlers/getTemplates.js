@@ -3,7 +3,7 @@
 const HttpStatus = require('http-status');
 const { UserTemplate } = require('../entities');
 const { getTemplates } = require('../queries');
-const { handleSuccess, handleError } = require('../../../libs/response-handler');
+const { handleSuccess, handleError } = require('../../libs/utils/response-util');
 const { makeHandler } = require('../../libs/utils/handler-util');
 const { getTemplatesSchema } = require('../schema');
 

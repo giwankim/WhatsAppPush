@@ -33,10 +33,10 @@ provider:
   iam:
     role:
       statements:
-        - ${file(framework/iam/TemplatesTableIAM.yml):TemplatesTableIAM}
-        - ${file(framework/iam/RecipientFilesBucketIAM.yml):RecipientFilesBucketIAM}
-        - ${file(framework/iam/WhatsAppMessageQueueIAM.yml):WhatsAppMessageQueueIAM}
-        - ${file(framework/iam/NotificationTaskTableIAM.yml):NotificationTaskTableIAM}
+        - ${file(sls/iam/TemplatesTableIAM.yml):TemplatesTableIAM}
+        - ${file(sls/iam/RecipientFilesBucketIAM.yml):RecipientFilesBucketIAM}
+        - ${file(sls/iam/WhatsAppMessageQueueIAM.yml):WhatsAppMessageQueueIAM}
+        - ${file(sls/iam/NotificationTaskTableIAM.yml):NotificationTaskTableIAM}
 
   environment:
     REGION: ${self:provider.region}
@@ -46,16 +46,16 @@ provider:
     NOTIFICATION_TASK_TABLE_NAME: ${self:custom.NotificationTaskTable.name}
 
 functions:
-  - ${file(framework/functions/functions-templates.yml)}
-  - ${file(framework/functions/functions-upload.yml)}
-  - ${file(framework/functions/functions-notification.yml)}
+  - ${file(sls/functions/functions-templates.yml)}
+  - ${file(sls/functions/functions-upload.yml)}
+  - ${file(sls/functions/functions-notification.yml)}
 
 resources:
   Resources:
-    TemplatesTable: ${file(framework/resources/TemplatesTable.yml):TemplatesTable}
-    RecipientFilesBucket: ${file(framework/resources/RecipientFilesBucket.yml):RecipientFilesBucket}
-    WhatsAppMessageQueue: ${file(framework/resources/WhatsAppMessageQueue.yml):WhatsAppMessageQueue}
-    NotificationTaskTable: ${file(framework/resources/NotificationTaskTable.yml):NotificationTaskTable}
+    TemplatesTable: ${file(sls/resources/TemplatesTable.yml):TemplatesTable}
+    RecipientFilesBucket: ${file(sls/resources/RecipientFilesBucket.yml):RecipientFilesBucket}
+    WhatsAppMessageQueue: ${file(sls/resources/WhatsAppMessageQueue.yml):WhatsAppMessageQueue}
+    NotificationTaskTable: ${file(sls/resources/NotificationTaskTable.yml):NotificationTaskTable}
 
 plugins:
   - serverless-export-env
