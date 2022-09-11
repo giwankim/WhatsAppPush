@@ -1,6 +1,6 @@
 'use strict';
 
-const getTemplateSchema = {
+exports.getTemplateSchema = {
   type: 'object',
   properties: {
     pathParameters: {
@@ -9,10 +9,9 @@ const getTemplateSchema = {
         userId: { type: 'string' },
         templateId: { type: 'string' },
       },
+      additionalProperties: false,
       required: ['userId', 'templateId'],
     },
   },
   required: ['pathParameters'],
 };
-
-module.exports = { getTemplateSchema };

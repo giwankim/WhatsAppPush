@@ -8,6 +8,7 @@ const getSignedUrlSchema = {
       properties: {
         fileName: { type: 'string' },
       },
+      additionalProperties: false,
       required: ['fileName'],
     },
     pathParameters: {
@@ -15,6 +16,7 @@ const getSignedUrlSchema = {
       properties: {
         userId: { type: 'string' },
       },
+      additionalProperties: false,
       required: ['userId'],
     },
   },

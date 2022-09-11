@@ -1,6 +1,6 @@
 'use strict';
 
-const updateTemplateSchema = {
+exports.updateTemplateSchema = {
   type: 'object',
   properties: {
     body: {
@@ -9,6 +9,7 @@ const updateTemplateSchema = {
         templateName: { type: 'string' },
         templateMessage: { type: 'string' },
       },
+      additionalProperties: false,
       required: ['templateName', 'templateMessage'],
     },
     pathParameters: {
@@ -17,10 +18,9 @@ const updateTemplateSchema = {
         userId: { type: 'string' },
         templateId: { type: 'string' },
       },
+      additionalProperties: false,
       required: ['userId', 'templateId'],
     },
   },
   required: ['body', 'pathParameters'],
 };
-
-module.exports = { updateTemplateSchema };

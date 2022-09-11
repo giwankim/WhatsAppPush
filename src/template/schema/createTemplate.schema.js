@@ -11,6 +11,7 @@ const createTemplateSchema = {
         userId: { type: 'string' },
         idempotentKey: { type: 'string' },
       },
+      additionalProperties: false,
       required: ['templateName', 'templateMessage', 'userId', 'idempotentKey'],
     },
   },
