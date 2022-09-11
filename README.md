@@ -80,7 +80,7 @@
 
 #### Requirements
 
-- Implement a lambda function called `CreateNotification` that reads CSV/XLSX recipient list; then publishes the parsed and extracted recipient details including the message template and phone numbers onto SQS message queue for further processing.
+- Implement `CreateNotification` that handles notification request by publishing notification task details onto SQS message queue for further processing.
 
 #### TODO
 
@@ -90,9 +90,9 @@
     - [x] The table should have a composite primary key consisting of partition key `user_id` of type string and sort key `notification_id` of type string.
 
 - [ ] Provide an endpoint to which users will submit notification tasks. This endpoint will accept the details about recipient, message text, and other relevant fields.
-    - [ ] Handle both bulk and individual message delivery tasks. The route for both operations should be the same, the difference being the request body paramters.
-    - [ ] Store submitted notification task details such as message, recipient or recipient file, and other properties into `NotificationTaskTable`.
-    - [ ] If user uploaded recipient list file, parse the CSV/XLSX file and process the parsed data
-    - [ ] Send these notification task details to the `WhatsAppMessageQueue`
+    - [x] Handle both bulk and individual message delivery tasks. The route for both operations should be the same, the difference being the request body paramters.
+    - [x] Store submitted notification task details such as message, recipient or recipient file, and other properties in `NotificationTaskTable`.
+    - [ ] Parse CSV/XLSX recipient list file if necessary and process the data individually.
+    - [ ] Publish notification task details including the message template and phone numbers to `WhatsAppMessageQueue`.
 
 - [x] Define lambda function `ListNotifications` associated with GET `/notification/{userId}` that lists all notification tasks by `user_id` from `NotificationTaskTable`.
