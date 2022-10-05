@@ -12,5 +12,6 @@ exports.enqueueMessage = (message) => {
     MessageBody: JSON.stringify(message),
     QueueUrl: process.env.WHATSAPP_MESSAGE_QUEUE_URL,
   };
-  return sqsClient.send(new SendMessageCommand(input));
+  const command = new SendMessageCommand(input);
+  return sqsClient.send(command);
 };
