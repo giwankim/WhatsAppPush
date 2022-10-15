@@ -2,6 +2,11 @@ service: whatsapppush-${self:custom.name}
 
 frameworkVersion: '3'
 
+plugins:
+  - serverless-export-env
+  - serverless-plugin-log-retention
+  - serverless-webpack
+
 custom:
   name: giwankim
   webpack:
@@ -56,8 +61,3 @@ resources:
     RecipientFilesBucket: ${file(sls/resources/RecipientFilesBucket.yml):RecipientFilesBucket}
     WhatsAppMessageQueue: ${file(sls/resources/WhatsAppMessageQueue.yml):WhatsAppMessageQueue}
     NotificationTaskTable: ${file(sls/resources/NotificationTaskTable.yml):NotificationTaskTable}
-
-plugins:
-  - serverless-export-env
-  - serverless-plugin-log-retention
-  - serverless-webpack
